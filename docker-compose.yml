@@ -1,17 +1,17 @@
 version: "3.9"
 
 services:
-  testdb:
-    container_name: testdb
+  mysqldb:
+    container_name: mysqldb
     image: mysql:8
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: testdb 
-  test:
-    container_name: test
-    image: test
+      MYSQL_ROOT_PASSWORD: mysqldb
+  tpachat:
+    container_name: tpachat
+    image: tpachat
     depends_on:
-      - testdb
+      - mysqldb
     restart: on-failure
     ports:
       - 8089:9090
