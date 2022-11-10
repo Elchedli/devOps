@@ -4,6 +4,13 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
+        stage('SRC Analysis Testing') {
+            steps {
+        	    withSonarQubeEnv('sonarqube:8.9.7') { 
+        		    sh "mvn sonar:sonar"
+    		    }
+            }
+        }
         stage('Build Artifact') { 
             steps { 
 		        sh 'mvn clean package' 
@@ -14,16 +21,9 @@ pipeline {
                 sh 'mvn deploy -DskipTests'
       	    }
     	}
-        stage('SRC Analysis Testing') {
-            steps {
-        	    withSonarQubeEnv('sonarqube:8.9.7') { 
-        		    sh "mvn sonar:sonar"
-    		    }
-            }
-        }
 	    stage('Start Containers') {
 	        steps {
-		        sh 'mvn docker-compose up'
+		        sh 'docker-compose up'
 	        }
 	    }
     }
