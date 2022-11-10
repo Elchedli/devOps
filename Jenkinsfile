@@ -4,27 +4,27 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-	stage('SRC Analysis Testing') {
+	    stage('SRC Analysis Testing') {
             steps {
-        	withSonarQubeEnv('sonarqube:8.9.7') { 
-        		sh "mvn sonar:sonar"
-    		}
+        	    withSonarQubeEnv('sonarqube:8.9.7') { 
+        		    sh "mvn sonar:sonar"
+    		    }
             }
         }
         stage('Build Artifact') { 
             steps { 
-		sh 'mvn clean package' 
+		        sh 'mvn clean package' 
             }
         }
-	stage ('Deploy Artifact to Nexus') {
+	    stage ('Deploy Artifact to Nexus') {
             steps {
                 sh 'mvn deploy -DskipTests'
       	    }
     	}
-	stage('Start Containers') {
-	    steps {
-		sh 'mvn docker-compose up'
+	    stage('Start Containers') {
+	        steps {
+		        sh 'mvn docker-compose up'
+	        }
 	    }
-	}
     }
 }
