@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  testdb:
+    container_name: testdb
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: testdb 
+  test:
+    container_name: test
+    image: test
+    depends_on:
+      - testdb
+    restart: on-failure
+    ports:
+      - 8089:9090
