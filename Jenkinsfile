@@ -27,7 +27,7 @@ pipeline {
 		
 		stage('Building Docker Image'){
  			  steps {
-                      sh 'docker build -t Yassinekaroui/tpachat .'
+                      sh 'docker build -t yassinekaroui/tpachat .'
                }
  		}
 
