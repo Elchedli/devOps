@@ -21,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reglement implements Serializable{
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,5 +34,10 @@ public class Reglement implements Serializable{
 	@ManyToOne
 	@JsonIgnore
 	private Facture facture;
-	
+	public Reglement(float montantPaye, float montantRestant, Boolean payee, Date dateReglement) {
+		this.montantPaye = montantPaye;
+		this.montantRestant = montantRestant;
+		this.payee = payee;
+		this.dateReglement = dateReglement;
+	}
 }
