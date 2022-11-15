@@ -3,6 +3,9 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
+	environment {
+        DOCKERHUB_CREDENTIALS=credentials('docker-hub')
+    }
     stages {
         stage('SRC Analysis Testing') {
             steps {
@@ -21,6 +24,19 @@ pipeline {
                 sh 'mvn deploy -DskipTests'
       	    }
     	}
+		
+		stage('Building Docker Image'){
+ 			  steps {
+                      sh 'docker build -t Yassinekaroui/tpachat .'
+               }
+ 		}
+
+ 		stage('Pushing Docker image') {
+             steps {
+                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+                 sh 'docker push Yassinekaroui/tpachat'
+                 }
+ 		}
 	    stage('Start Containers') {
 	        steps {
 		        sh 'docker-compose up'
