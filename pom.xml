@@ -8,6 +8,9 @@
 		<version>2.5.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+	<distributionManagement>
+		<url>http://192.168.1.124:8081/repository/maven-releases/</url>
+	</distributionManagement>
 	<groupId>com.esprit.examen</groupId>
 	<artifactId>tpAchatProject</artifactId>
 	<version>1.0</version>
