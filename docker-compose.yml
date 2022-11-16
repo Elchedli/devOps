@@ -20,5 +20,3 @@ services:
     restart: on-failure
     ports:
       - 8089:9090
-    environment:
-      - spring.datasource.url=jdbc:mysql://mysqldb:3306/tpachat?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
