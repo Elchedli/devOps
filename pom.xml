@@ -9,11 +9,16 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<distributionManagement>
-      <repository>
-          <id>deploymentRepo</id>
-        <url>http://192.168.1.124:8081/repository/maven-releases/</url>
-      </repository>
-    </distributionManagement>
+	      <repository>
+		  <id>deploymentRepo</id>
+		<url>http://192.168.1.124:8081/repository/maven-releases/</url>
+	      </repository>
+	</distributionManagement>
+	<plugin>
+	  <groupId>org.jacoco</groupId>
+	  <artifactId>jacoco-maven-plugin</artifactId>
+	  <version>0.8.9-SNAPSHOT</version>
+	</plugin>
 	<groupId>com.esprit.examen</groupId>
 	<artifactId>tpAchatProject</artifactId>
 	<version>1.0</version>
@@ -74,6 +79,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.jacoco</groupId>
+		    <artifactId>jacoco-maven-plugin</artifactId>
+		    <version>0.8.6</version>
 		</dependency>
 	</dependencies>
 
