@@ -14,11 +14,13 @@ pipeline {
     		    }
             }
         }
+        
         stage('Build Artifact') { 
             steps { 
 		        sh 'mvn clean package' 
             }
         }
+
 	    stage ('Deploy Artifact to Nexus') {
             steps {
                 sh 'mvn deploy -DskipTests'
