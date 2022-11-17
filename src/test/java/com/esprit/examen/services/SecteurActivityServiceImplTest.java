@@ -18,13 +18,13 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.TestMethodOrder;f
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
 @TestMethodOrder(OrderAnnotation.class)
-public class SecteurActiviteServiceImpTest {
+public class SecteurActivityServiceImpTest {
 
     @Autowired
     ISecteurActiviteService  secteurActiviteService;
@@ -63,7 +63,7 @@ public class SecteurActiviteServiceImpTest {
     public void testRetrieveAllsecteurActivite() throws ParseException {
         List<SecteurActivite> listSecteurActivite = secteurActiviteService.retrieveAllSecteurActivite();
         Assertions.assertNotEquals(0, listSecteurActivite.size());
-        log.info("Nombre ActiviteService: " + listSecteurActivite.size()+" \n");
+      /* */  log.info("Nombre ActiviteService: " + listSecteurActivite.size()+" \n");
         for(int i=0;i<listSecteurActivite.size();i++){
             log.info("==>"+listSecteurActivite.get(i).getCodeSecteurActivite());
         }
