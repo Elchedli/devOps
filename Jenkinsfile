@@ -7,6 +7,12 @@ pipeline {
         DOCKERHUB_CREDENTIALS=credentials('docker-hub')
     }
     stages {
+         stage('Git checkout') {
+            steps {
+                git branch: 'yassine', url: 'https://github.com/Elchedli/devOps.git'          
+            }
+        }
+
         stage ('Unit Testing') {
             steps {
                 sh 'mvn test';
