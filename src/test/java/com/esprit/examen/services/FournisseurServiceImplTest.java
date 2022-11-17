@@ -17,7 +17,7 @@ import com.esprit.examen.entities.CategorieFournisseur;
 import com.esprit.examen.entities.DetailFournisseur;
 import com.esprit.examen.entities.Fournisseur;
 import com.esprit.examen.entities.SecteurActivite;
-import com.mysql.cj.log.Log;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
