@@ -71,18 +71,18 @@ pipeline {
                 sh "docker push shidono/tpachat"
             }
         }
-        
-       /*post {
-                success {
-                     mail to: "chedli.elloumi@esprit.tn",
-                     subject: "success",
-                     body: "success on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL}"
-                }
-        failure {
-                    mail to: "chedli.elloumi@esprit.tn",
-                     subject: "Failure",
-                     body: "Failure on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL} "     
-                }
-        }*/
     }
+    post {
+            success {
+                 mail to: "chedli.elloumi@esprit.tn",
+                 subject: "success",
+                 body: "success on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL}"
+            }
+    failure {
+                mail to: "chedli.elloumi@esprit.tn",
+                 subject: "Failure",
+                 body: "Failure on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL} "     
+            }
+    }
+        
 }
