@@ -72,6 +72,12 @@ pipeline {
                 sh "docker push shidono/tpachat"
             }
         }
+
+        stage('docker compose') {
+              steps {
+                  sh "docker compose -f docker-compose.yml up -d"
+              }
+        }
     }
     post {
             success {
