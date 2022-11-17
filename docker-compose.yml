@@ -11,7 +11,7 @@ services:
       - mysqldb
 
   mysqldb:
-    container-name: mysqldb
+    container_name: mysqldb
     image: mysql:8
     volumes:
       - /home/mysql/khaleddata:/var/lib/mysql:rw
