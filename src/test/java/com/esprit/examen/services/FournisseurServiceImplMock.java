@@ -1,13 +1,8 @@
-package tn.esprit.rh.achat;
+package com.esprit.examen.services;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.times;
 
 import java.util.ArrayList;
-import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.Mockito.*;
-import java.util.List;
-import java.util.Optional;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,60 +14,56 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import tn.esprit.rh.achat.entities.Fournisseur;
 
-import tn.esprit.rh.achat.entities.FournisseurRequestModel;
-import tn.esprit.rh.achat.repositories.FournisseurRepository;
-import tn.esprit.rh.achat.services.FournisseurServiceImpl;
+import com.esprit.examen.entities.CategorieFournisseur;
+import com.esprit.examen.entities.Fournisseur;
+import com.esprit.examen.repositories.FournisseurRepository;
+
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
- class TestFournisseurServiceImplMock {
-	@Mock
-	FournisseurRepository fourniseurRepository;
-	@InjectMocks
-	FournisseurServiceImpl fournisseurService;
-	Fournisseur p=new Fournisseur((long) 1,"123","libelle 1");
-	Fournisseur p1=new Fournisseur((long) 2,"123","libelle 2");
-	Fournisseur p2=new Fournisseur((long) 3,"123","libelle 3");
-	List<Fournisseur> listUsers = new ArrayList<Fournisseur>() {
-		{
-		add(p1);
-		add(p2);
-		}
-		};
-		
-	@Test
-	 void createFournisseurTest()
-	{ 
-		FournisseurRequestModel pR=new FournisseurRequestModel((long) 1,"123","libelle 1");
-		fournisseurService.addFournisseur(pR);
-		System.out.println("created");
-		Assertions.assertNotNull("created");
-	}
-	@Test
-	 void testRetrieveUser() {
-	Mockito.when(fourniseurRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(p));
-		Fournisseur fournisseur1 = fournisseurService.retrieveFournisseur((long)(2));
-		System.out.println("retrieved");
-		Assertions.assertNotNull(fournisseur1);
-		}
-	
-	@Test
-     void updateFournisseurTest(){
-        p.setLibelle("Libelle 1 updated");
-        FournisseurRequestModel prm=new FournisseurRequestModel(p.getIdFournisseur(),p.getCode(),p.getLibelle());
-        Fournisseur updatedFournisseur = fournisseurService.updateFournisseur(prm);
-        System.out.println("updated");
-        Assertions.assertNotNull(updatedFournisseur);
+class FournisseurServiceImplMock {
+    
+    @Mock
+    FournisseurRepository fournisseurRepository;
+
+    @InjectMocks
+    FournisseurServiceImpl fournisseurServiceImpl;
+
+    Fournisseur fournisseur = new Fournisseur(1L, "code1", "libelle1", CategorieFournisseur.CONVENTIONNE, null, null, null);
+
+    List<Fournisseur> listFournisseurs = new ArrayList<Fournisseur>() {
+        {
+            add(new Fournisseur(2L, "code2", "libelle2", CategorieFournisseur.CONVENTIONNE, null, null, null));
+            add(new Fournisseur(3L, "code3", "libelle3", CategorieFournisseur.ORDINAIRE, null, null, null));
+        }
+    };
+
+    @Test
+    public void testretrieveFournisseur(){
+
+        Mockito.when(fournisseurRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(fournisseur));
+        
+        Assertions.assertNotNull(fournisseurServiceImpl.retrieveFournisseur(2L));
+    }
+    
+    //Test
+    
+    @Test
+    public void testaddFournisseur(){
+
+        Mockito.when(fournisseurRepository.save(fournisseur)).thenReturn(fournisseur);
+
+        Assertions.assertNotNull(fournisseurServiceImpl.addFournisseur(fournisseur));
     }
 
     @Test
-     void deleteFournisseurTest(){
-        willDoNothing().given(fourniseurRepository).deleteById(p1.getIdFournisseur());
-        fournisseurService.deleteFournisseur(p1.getIdFournisseur());
-        System.out.println("deleted");
-        Assertions.assertNotNull("delete");
-    }
+    public void testdeleteFournisseur(){
 
+        fournisseurServiceImpl.deleteFournisseur(3L);
+
+        Mockito.verify(fournisseurRepository, times(1)).deleteById(3L);
+
+        assertEquals(null, fournisseurServiceImpl.retrieveFournisseur(3L));
+    }
 }
