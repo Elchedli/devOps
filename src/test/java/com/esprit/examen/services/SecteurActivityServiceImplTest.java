@@ -39,7 +39,7 @@ public class SecteurActivityServiceImpTest {
         SecteurActivite x = secteurActiviteService.addSecteurActivite(sec);
         assertNotNull(x.getCodeSecteurActivite());
         assertNotNull(x.getLibelleSecteurActivite());
-        log.info("categorie ajouter avec success");
+        //log.info("categorie ajouter avec success");
     }
 
     @Test
@@ -55,7 +55,7 @@ public class SecteurActivityServiceImpTest {
         SecteurActivite x = secteurActiviteService.updateSecteurActivite(sec);
         assertNotNull(x.getCodeSecteurActivite());
         assertNotNull(x.getLibelleSecteurActivite());
-        log.info("code modifier avec success");
+       /*  log.info("code modifier avec success");*/
     }
 
     @Test
@@ -63,10 +63,10 @@ public class SecteurActivityServiceImpTest {
     public void testRetrieveAllsecteurActivite() throws ParseException {
         List<SecteurActivite> listSecteurActivite = secteurActiviteService.retrieveAllSecteurActivite();
         Assertions.assertNotEquals(0, listSecteurActivite.size());
-      /* */  log.info("Nombre ActiviteService: " + listSecteurActivite.size()+" \n");
+      /*   log.info("Nombre ActiviteService: " + listSecteurActivite.size()+" \n");
         for(int i=0;i<listSecteurActivite.size();i++){
-            log.info("==>"+listSecteurActivite.get(i).getCodeSecteurActivite());
-        }
+           // log.info("==>"+listSecteurActivite.get(i).getCodeSecteurActivite());
+        }*/
     }
 
     @Test
@@ -77,7 +77,7 @@ public class SecteurActivityServiceImpTest {
         sec.setLibelleSecteurActivite("libelle 3");
         secteurActiviteService.addSecteurActivite(sec);
         secteurActiviteService.deleteSecteurActivite(sec.getIdSecteurActivite());
-        log.info("secteur supprimer avec success");
+        //log.info("secteur supprimer avec success");
     }
 
 }
