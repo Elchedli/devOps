@@ -28,6 +28,12 @@ public class SecteurActivite implements Serializable{
 	private Long idSecteurActivite;
 	private String codeSecteurActivite;
 	private String libelleSecteurActivite;
+
+	public SecteurActivite(){
+
+	}
+	
+
 	@ManyToMany(mappedBy="secteurActivites")
 	@JsonIgnore
 	private Set<Fournisseur> fournisseurs;
