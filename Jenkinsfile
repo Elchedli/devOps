@@ -10,6 +10,8 @@ pipeline {
         }
         
  
+        
+        
         stage('Login dockerhub') {
             steps {
                  sh "sudo chmod 777 /var/run/docker.sock"
@@ -24,24 +26,23 @@ pipeline {
             }
         }
         
-        stage('Test') {
+        /*stage('Test') {
             steps {
                 sh "mvn clean test -DskipTests"
             }
-        }
-        
-        stage('MOCKITO') {
-            steps {
-           sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceMockTest' 
-            }
-        }
+        }*/
         
          stage('JUNIT') {
             steps {
-            sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduiServiceImplTest -Dmaven.test.failure.ignore=true'  
+            sh 'mvn clean test -Dtest=com.esprit.examen.services.FournisseurServiceImplTest -Dmaven.test.failure.ignore=true'  
             }
         }
         
+         stage('MOCKITO') {
+            steps {
+           sh 'mvn clean test -Dtest=com.esprit.examen.services.FournisseurServiceImplMock' 
+            }
+        }
         
         stage('SonarQube') {
             steps {
