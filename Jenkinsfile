@@ -27,18 +27,18 @@ pipeline {
       	//     }
     	// }
 		
-		stage('Building Docker Image'){
- 			  steps {
-                      sh 'docker build -t yassinekaroui/tpachat .'
-               }
- 		}
+		// stage('Building Docker Image'){
+ 		// 	  steps {
+        //               sh 'docker build -t yassinekaroui/tpachat .'
+        //        }
+ 		// }
 
- 		stage('Pushing Docker image') {
-             steps {
-                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
-                 sh 'docker push yassinekaroui/tpachat'
-                 }
- 		}
+ 		// stage('Pushing Docker image') {
+        //      steps {
+        //          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+        //          sh 'docker push yassinekaroui/tpachat'
+        //          }
+ 		// }
 	    stage('Start Containers') {
 	        steps {
 		        sh 'docker-compose up'
