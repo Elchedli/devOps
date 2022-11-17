@@ -2,16 +2,22 @@ version: "3.9"
 
 services:
   mysqldb:
-    container_name: mysqldb
+    container_name: database
     image: mysql
     restart: unless-stopped
     ports:
       - "3306:3306"
-  tpachat:
-    container_name: tpachat
+    environment:
+      - MYSQL_DATABASE=tpachat
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+  spring_app:
     image: yassinekaroui/tpachat
+    container_name: backend_app
+    restart: on-failure
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/tpachat?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    ports:
+      - "8089:8089"
     depends_on:
       - mysqldb
-    restart: on-failure
-    ports:
-      - 8089:9090
