@@ -30,7 +30,7 @@ public class SecteurActiviteServiceImplTest {
     SecteurActiviteServiceImpl secteurActiviteServiceImpl;
 
 
-    SecteurActivite secteurActivite = new SecteurActivite("3a","Papier");
+    SecteurActivite secteurActivite = new SecteurActivite(1,"3a","Papier");
 
     @Test
     public void testRetrieveSecteurActivite() {
