@@ -43,7 +43,13 @@ pipeline {
            sh 'mvn clean test -Dtest=com.esprit.examen.services.FournisseurServiceImplMock' 
             }
         }
-        
+
+         stage('Jacoco') {
+            steps {
+                sh 'mvn clean jacoco:prepare-agent package' 
+            }
+        }
+
         stage('SonarQube') {
             steps {
                 sh "mvn sonar:sonar -Dsonar.login=squ_6d91055b96eb44c55e1646262f6fa8707a5690c8 -DskipTests"
@@ -56,12 +62,7 @@ pipeline {
             }
         }
         
-        stage('Jacoco') {
-            steps {
-                sh 'mvn clean jacoco:prepare-agent package' 
-            }
-        }
-        
+       
         stage('Build image') {
             steps {
                 sh "docker build -t shidono/tpachat ."
@@ -75,7 +76,7 @@ pipeline {
 
         stage('docker compose') {
               steps {
-                  sh "docker compose -f docker-compose.yml up -d"
+                  sh "docker-compose up -d"
               }
         }
     }
