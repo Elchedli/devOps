@@ -9,7 +9,7 @@ pipeline {
     stages {
          stage('Git checkout') {
             steps {
-                git branch: 'yassine', url: 'https://github.com/Elchedli/devOps.git'          
+                git branch: 'yassine', url: 'https://github.com/Elchedli/devOps.git',credentialsId:'test-credential'          
             }
         }
 
