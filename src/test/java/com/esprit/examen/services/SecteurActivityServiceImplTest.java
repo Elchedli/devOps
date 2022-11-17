@@ -49,7 +49,7 @@ public class SecteurActivityServiceImpTest {
         sec.setCodeSecteurActivite("code 2");
         sec.setLibelleSecteurActivite("libelle 2");
         secteurActiviteService.addSecteurActivite(sec);
-        log.info("code modifier avec success");
+       // log.info("code modifier avec success");
         sec.setCodeSecteurActivite("code 3");
         sec.setLibelleSecteurActivite("libelle 3");
         SecteurActivite x = secteurActiviteService.updateSecteurActivite(sec);
