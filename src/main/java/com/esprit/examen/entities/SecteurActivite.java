@@ -29,9 +29,6 @@ public class SecteurActivite implements Serializable{
 	private String codeSecteurActivite;
 	private String libelleSecteurActivite;
 
-	public SecteurActivite(){
-
-	}
 	
 
 	@ManyToMany(mappedBy="secteurActivites")
