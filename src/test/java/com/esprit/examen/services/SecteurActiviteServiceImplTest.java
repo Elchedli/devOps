@@ -24,7 +24,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 @SpringBootTest
 @Slf4j
 @TestMethodOrder(OrderAnnotation.class)
-public class SecteurActivityServiceImpTest {
+public class SecteurActiviteServiceImpTest {
 
     @Autowired
     ISecteurActiviteService  secteurActiviteService;
