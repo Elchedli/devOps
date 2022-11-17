@@ -13,11 +13,11 @@ pipeline {
             }
         }
 
-        stage ('Unit Testing') {
-            steps {
-                sh 'mvn test';
-            }
-        }
+        // stage ('Unit Testing') {
+        //     steps {
+        //         sh 'mvn test';
+        //     }
+        // }
         
         stage('SRC Analysis Testing') {
             steps {
