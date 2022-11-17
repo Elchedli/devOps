@@ -16,8 +16,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+
+
 public class SecteurActivite implements Serializable{
 	/**
 	 * 
@@ -36,6 +36,10 @@ public class SecteurActivite implements Serializable{
 	
 	}
 
+	public SecteurActivite() {
+	
+	
+	}
 	@ManyToMany(mappedBy="secteurActivites")
 	@JsonIgnore
 	private Set<Fournisseur> fournisseurs;
