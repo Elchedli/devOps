@@ -25,6 +25,13 @@ pipeline {
                 sh "mvn clean package -DskipTests"
             }
         }
+                stage('Build') {
+            steps {
+                sh "docker-compose start mysqldb"
+                sh "mvn test"
+            }
+        }
+        
         
         /*stage('Test') {
             steps {
