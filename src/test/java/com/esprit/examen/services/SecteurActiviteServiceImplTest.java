@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class SecteurActiviteServiceImplTest {
 
@@ -30,7 +30,7 @@ public class SecteurActiviteServiceImplTest {
     SecteurActiviteServiceImpl secteurActiviteServiceImpl;
 
 
-    SecteurActivite secteurActivite = new secteurActivite(121,"3a","Papier");
+    SecteurActivite secteurActivite = new secteurActivite(121L,"3a","Papier");
 
     @Test
     public void testRetrieveSecteurActivite() {
