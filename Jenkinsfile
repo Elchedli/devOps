@@ -27,7 +27,7 @@ pipeline {
         }
                 stage('teest') {
             steps {
-                sh "docker-compose up -d mysqldb"
+                sh "docker-compose up -d "
                 sh "mvn test"
             }
         }
