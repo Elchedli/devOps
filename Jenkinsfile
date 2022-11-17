@@ -1,88 +1,78 @@
 pipeline {
-    agent {label "maven"}
+    agent {label 'agent'} 
+  
+
+     
     stages {
-        stage ('GIT') {
+       stage('Compilation du Projet'){
+            steps{
+                checkout([$class: 'GitSCM', branches: [[name: '*/oussama']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Elchedli/devOps']]])
+             sh 'mvn clean install'
+            }  
+        }   		
+        /*stage('Build Artifact') {
             steps {
-               echo "Getting Project from Git"; 
-                git branch: "chedli",
-                    url: "https://github.com/Elchedli/devOps",credentialsId:'githubLogin';
+              sh "mvn clean package -DskipTests=true"
+              archive 'target/*.jar' //so that they can be downloaded later
+            }
+        } */  
+        
+     
+        
+        stage('Package') {
+            steps {
+                sh 'mvn package'
+                // bat '.\\mvnw package'
+            } 
+        }
+       
+      	
+        stage('MOCKITO + JUnit') {
+            steps {
+           sh 'mvn clean test -Dtest=com.esprit.examen.services.SecteurActiviteServiceImplTest' 
             }
         }
-        
- 
-        stage('Login dockerhub') {
-            steps {
-                 sh "sudo chmod 777 /var/run/docker.sock"
-                 sh "docker login -u shidono -p dckr_pat_5BTvF6ZtABQc9jFjAIZoz0QX-XI"
-            }
-        }
-        
-        
-        stage('Build') {
-            steps {
-                sh "mvn clean package -DskipTests"
-            }
-        }
-        
-        stage('Test') {
-            steps {
-                sh "mvn clean test -DskipTests"
-            }
-        }
-        
-        stage('MOCKITO') {
-            steps {
-           sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceMockTest' 
-            }
-        }
-        
-         stage('JUNIT') {
-            steps {
-            sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduiServiceImplTest -Dmaven.test.failure.ignore=true'  
-            }
-        }
-        
-        
-        stage('SonarQube') {
-            steps {
-                sh "mvn sonar:sonar -Dsonar.login=squ_6d91055b96eb44c55e1646262f6fa8707a5690c8 -DskipTests"
-            }
-        }
-        
-        stage('Nexus') {
-            steps {
-                sh "mvn deploy -DskipTests"
-            }
-        }
-        
+
         stage('Jacoco') {
             steps {
                 sh 'mvn clean jacoco:prepare-agent package' 
             }
         }
-        
+
         stage('Build image') {
             steps {
-                sh "docker build -t shidono/tpachat ."
+                sh "docker build -t tpachat ."
             }
         }
-           stage('Push image') {
+
+        stage('NEXUS'){
+            steps{
+                sh "mvn deploy -DskipTests=true"
+            }
+        } 
+
+        stage('MVN SONARQUBE') {
             steps {
-                sh "docker push shidono/tpachat"
+                sh 'mvn sonar:sonar  -Dsonar.login=admin -Dsonar.password=admin'
+                
             }
-        }
-        
-       /*post {
+        } 
+
+       
+    }
+       post {
                 success {
-                     mail to: "chedli.elloumi@esprit.tn",
+                     mail to: "oussama.zribi@esprit.tn",
                      subject: "success",
                      body: "success on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL}"
                 }
         failure {
-                    mail to: "chedli.elloumi@esprit.tn",
+                    mail to: "oussama.zribi@esprit.tn",
                      subject: "Failure",
                      body: "Failure on job ${env.JOB_NAME}, Build Number: ${env.BUILD_NUMBER}, Build URL: ${env.BUILD_URL} "     
                 }
-        }*/
-    }
+            }
 }
+
+
+
