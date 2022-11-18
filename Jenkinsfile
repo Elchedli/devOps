@@ -38,7 +38,7 @@ pipeline {
                 sh "mvn clean test -DskipTests"
             }
         }*/
-        
+        //test
          stage('JUNIT') {
             steps {
             sh 'mvn clean test -Dtest=com.esprit.examen.services.FournisseurServiceImplTest -Dmaven.test.failure.ignore=true'  
