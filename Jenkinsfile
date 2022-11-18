@@ -30,7 +30,7 @@ pipeline {
                 sh "docker-compose up -d "
                 sh "mvn test"
             }
-        }*/
+        }d*/
         
         
         /*stage('Test') {
