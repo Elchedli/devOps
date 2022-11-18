@@ -36,6 +36,11 @@ pipeline {
 
       }
     }
+	  stage('Running Back') {
+      		steps {
+         		sh 'docker-compose up -d'
+		}
+	  }
      stage('Docker login') {
       steps {
          sh 'echo "Docker login is processing ...."'
