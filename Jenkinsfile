@@ -53,10 +53,39 @@ pipeline {
 
         stage('MVN SONARQUBE') {
             steps {
-                sh 'mvn sonar:sonar  -Dsonar.login=admin -Dsonar.password=admin'
+                sh 'mvn sonar:sonar  -Dsonar.login=admin -Dsonar.password=123'
                 
             }
         } 
+        stage('upload war file to nexus'){
+            steps{
+                script{
+                    nexusArtifactUploader artifacts:
+                     [
+                        [
+                            artifactId: 'tpAchatProject',
+                             classifier: '', file: 'target/tpAchatProject-1.0.jar',
+                              type: 'jar'
+                              ]
+                              ],
+                               credentialsId: 'nexus',
+                                groupId: 'com.esprit.examen',
+                                 nexusUrl: '192.168.2.124:8080',
+                                  nexusVersion: 'nexus2',
+                                   protocol: 'http',
+                                    repository: 'app-devops', version: '1.0'
+                }
+            }
+        }
+
+        stage('push image to the dockerHUB'){
+            steps{
+                script{
+                    
+                }
+            }
+
+        }
 
        
     }

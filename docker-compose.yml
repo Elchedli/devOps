@@ -22,12 +22,12 @@ services:
       - /home/mysql/data:/var/lib/mysql --user 1000
 
   springapp:
-    image: shidono/achat
+    image: achat
     container_name: achat
     ports:
       - 8089:8089
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb/tpachato?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://192.168.2.124:8089/tpachato?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
