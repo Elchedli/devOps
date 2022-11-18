@@ -7,8 +7,8 @@ services:
     environment:
       MYSQL_DATABASE: tpachato
       MYSQL_USERNAME: root
-      MYSQL_PASSWORD: pass
-      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
 
     ports:
       # <Port exposed> : < MySQL Port running inside container>
