@@ -19,13 +19,13 @@ pipeline {
         //     }
         // }
         
-        stage('SRC Analysis Testing') {
-            steps {
-        	    withSonarQubeEnv('sonarqube:8.9.7') { 
-        		    sh "mvn sonar:sonar"
-    		    }
-            }
-        }
+        // stage('SRC Analysis Testing') {
+        //     steps {
+        // 	    withSonarQubeEnv('sonarqube:8.9.7') { 
+        // 		    sh "mvn sonar:sonar"
+    	// 	    }
+        //     }
+        // }
         
         stage('Build Artifact') { 
             steps { 
