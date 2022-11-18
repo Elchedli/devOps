@@ -25,12 +25,12 @@ pipeline {
                 sh "mvn clean package -DskipTests"
             }
         }
-                stage('teest') {
+        /*stage('teest') {
             steps {
                 sh "docker-compose up -d "
                 sh "mvn test"
             }
-        }
+        }*/
         
         
         /*stage('Test') {
