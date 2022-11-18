@@ -6,7 +6,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 3306:3306
+      - 4000:4000
     volumes:
       - /home/mysqldata:/var/lib/msql
   spring_app:
