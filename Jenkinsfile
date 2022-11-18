@@ -41,13 +41,17 @@ pipeline {
          		sh 'docker-compose up -d'
 		}
 	  }
+	  stage ("JUNIT / MOCKITO") {
+	    	steps {
+			sh 'mvn test'
+		}          	
+	  }
      stage('Docker login') {
       steps {
          sh 'echo "Docker login is processing ...."'
 	      sh 'docker login --username aymen097 --password ${DOCKERHUBPASSWD}'
-
       }
-    }
+     }
     stage('Docker push') {
       steps {
          sh 'echo "Docker push is processing ...."'
