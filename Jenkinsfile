@@ -33,11 +33,11 @@ pipeline {
         }*/
         
         
-        /*stage('Test') {
+        stage('Test') {
             steps {
                 sh "mvn clean test -DskipTests"
             }
-        }*/
+        }
         
          stage('JUNIT') {
             steps {
